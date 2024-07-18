@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Repos\\ChadsLibraryPortfolio\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|c:\\repos\\chadslibraryportfolio\\api.webapi\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|solutionrelative:api.webapi\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|c:\\repos\\chadslibraryportfolio\\api.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|solutionrelative:api.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}|Helpers\\Helpers.csproj|c:\\repos\\chadslibraryportfolio\\helpers\\startupextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}|Helpers\\Helpers.csproj|solutionrelative:helpers\\startupextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}|Helpers\\Helpers.csproj|c:\\repos\\chadslibraryportfolio\\helpers\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}|Helpers\\Helpers.csproj|solutionrelative:helpers\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|c:\\repos\\chadslibraryportfolio\\api.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6CCE0218-F1B2-416F-B57D-CBA26E10B270}|API.WebApi\\API.WebApi.csproj|solutionrelative:api.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}|Model\\Model.csproj|c:\\repos\\chadslibraryportfolio\\model\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}|Model\\Model.csproj|solutionrelative:model\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Model.cs",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\Model\\Model.cs",
+              "RelativeDocumentMoniker": "Model\\Model.cs",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\Model\\Model.cs",
+              "RelativeToolTip": "Model\\Model.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T22:13:11.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\appsettings.json",
+              "RelativeDocumentMoniker": "API.WebApi\\appsettings.json",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\appsettings.json",
+              "RelativeToolTip": "API.WebApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-18T22:06:49.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\Constants.cs",
+              "RelativeDocumentMoniker": "Helpers\\Constants.cs",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\Constants.cs",
+              "RelativeToolTip": "Helpers\\Constants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T22:05:42.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StartupExtensions.cs",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\StartupExtensions.cs",
+              "RelativeDocumentMoniker": "Helpers\\StartupExtensions.cs",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\StartupExtensions.cs",
+              "RelativeToolTip": "Helpers\\StartupExtensions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T21:43:36.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\Startup.cs",
+              "RelativeDocumentMoniker": "API.WebApi\\Startup.cs",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\Startup.cs",
+              "RelativeToolTip": "API.WebApi\\Startup.cs",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAlwJwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T21:11:38.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "API.WebApi\\Program.cs",
+              "ToolTip": "C:\\Repos\\ChadsLibraryPortfolio\\API.WebApi\\Program.cs",
+              "RelativeToolTip": "API.WebApi\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T21:03:05.717Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
