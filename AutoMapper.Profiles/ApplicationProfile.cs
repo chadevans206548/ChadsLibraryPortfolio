@@ -1,6 +1,8 @@
 using AutoMapper;
 using ChadsLibraryPortfolio.Model.Entities;
 using ChadsLibraryPortfolio.ViewModels.Books;
+using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
+using ChadsLibraryPortfolio.ViewModels.Reviews;
 
 namespace ChadsLibraryPortfolio.AutoMapper.Profiles;
 
@@ -8,7 +10,27 @@ public class ApplicationProfile : Profile
 {
     public ApplicationProfile()
     {
+        #region Review
+        this.CreateMap<Review, ReviewViewModel>()
+            .ForMember(dest => dest.ReviewId, opt => opt.MapFrom(src => src.ReviewId))
+            .ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
+            .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Rating))
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            ;
+        #endregion
 
+        #region InventoryLog
+        this.CreateMap<InventoryLog, InventoryLogViewModel>()
+            .ForMember(dest => dest.InventoryLogId, opt => opt.MapFrom(src => src.InventoryLogId))
+            .ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
+            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
+            .ForMember(dest => dest.CheckoutDate, opt => opt.MapFrom(src => src.CheckoutDate))
+            .ForMember(dest => dest.CheckinDate, opt => opt.MapFrom(src => src.CheckinDate))
+            .ForMember(dest => dest.DueDate, opt => opt.MapFrom(src => src.DueDate))
+            ;
+        #endregion
+
+        #region Book
         this.CreateMap<Book, BookViewModel>()
             .ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
@@ -23,7 +45,7 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.AverageUserRating, opt => opt.MapFrom<AverageUserRatingResolver>())
             .ForMember(dest => dest.Available, opt => opt.MapFrom<BookAvailableResolver>())
             ;
-
+        #endregion
     }
 
     public class AverageUserRatingResolver : IValueResolver<Book, BookViewModel, decimal>
