@@ -1,4 +1,4 @@
-﻿using ChadsLibraryPortfolio.Helpers;
+using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -126,7 +126,7 @@ public class Startup
         services.AddBasicServices();
         services.AddAutoMappers();
 
-        services.AddValidatorsFromAssembly(Assembly.Load("ChadsLibraryPortfolio.ViewModel"));
+        services.AddValidatorsFromAssembly(Assembly.Load("ViewModels"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

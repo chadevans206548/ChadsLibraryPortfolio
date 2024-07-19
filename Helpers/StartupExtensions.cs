@@ -14,7 +14,7 @@ public static class StartupExtensions
     {
         var appMappingConfig = new MapperConfiguration(x =>
         {
-            x.AddMaps("ChadsLibraryPortfolio.AutoMapper.Profiles");
+            x.AddMaps("AutoMapper.Profiles");
         });
 
         var appMapper = appMappingConfig.CreateMapper();

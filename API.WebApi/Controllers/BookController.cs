@@ -21,10 +21,10 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpGet]
-    [Route("SearchBooks/{titleSearch}")]
-    public async Task<ActionResult<List<BookViewModel>>> SearchBooks(string titleSearch)
+    [Route("GetAllBookTitles")]
+    public async Task<ActionResult<List<string>>> GetAllBookTitles()
     {
-        return await this._bookService.SearchBooks(titleSearch);
+        return await this._bookService.GetAllBookTitles();
     }
 
     [HttpPost]

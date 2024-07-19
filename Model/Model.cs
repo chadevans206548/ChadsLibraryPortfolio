@@ -2,7 +2,8 @@ using ChadsLibraryPortfolio.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChadsLibraryPortfolio.Models;
-public class LibraryContext : DbContext
+
+public class LibraryContext(DbContextOptions<LibraryContext> options) : DbContext(options)
 {
     public DbSet<Book> Books { get; set; }
     public DbSet<Review> Reviews { get; set; }
@@ -35,8 +36,6 @@ public class LibraryContext : DbContext
             entity.Property(prop => prop.BookId).IsRequired();
             entity.Property(prop => prop.Rating).IsRequired();
             entity.Property(prop => prop.Description).IsRequired().HasColumnType("NVARCHAR(255)");
-
-            entity.HasOne(key => key.Book).WithMany().OnDelete(DeleteBehavior.Restrict);
         });
 
         modelBuilder.Entity<InventoryLog>(entity =>
@@ -48,8 +47,6 @@ public class LibraryContext : DbContext
             entity.Property(prop => prop.CheckoutDate).HasColumnType("DATE");
             entity.Property(prop => prop.CheckinDate).HasColumnType("DATE");
             entity.Property(prop => prop.DueDate).HasColumnType("DATE");
-
-            entity.HasOne(key => key.Book).WithMany().OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

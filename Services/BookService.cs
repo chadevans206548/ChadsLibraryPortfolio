@@ -16,12 +16,12 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteBook(int bookId)
+    public async Task<bool> DeleteBook(int bookId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<BookViewModel> EditBook(EditBookViewModel editBookViewModel)
+    public async Task<BookViewModel> EditBook(EditBookViewModel editBookViewModel)
     {
         throw new NotImplementedException();
     }
@@ -32,8 +32,9 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
         return this._mapper.Map<BookViewModel>(book);
     }
 
-    public Task<List<BookViewModel>> SearchBooks(string titleSearch)
+    public async Task<List<string>> GetAllBookTitles()
     {
-        throw new NotImplementedException();
+        return await this._libraryContext.Books.Select(x => x.Title).ToListAsync();
     }
+
 }
