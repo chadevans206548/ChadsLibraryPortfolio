@@ -1,10 +1,8 @@
-namespace ChadsLibraryPortfolio.Model.Entities;
-
-public class Book
+namespace ChadsLibraryPortfolio.ViewModels.Books;
+public class EditBookViewModel
 {
-    public Book()
+    public EditBookViewModel()
     {
-        this.BookId = 0;
         this.Title = string.Empty;
         this.Author = string.Empty;
         this.Description = string.Empty;
@@ -15,7 +13,6 @@ public class Book
         this.Isbn = string.Empty;
         this.PageCount = 0;
     }
-    public int BookId { get; set; }
     public string Title { get; set; }
     public string Author { get; set; }
     public string Description { get; set; }
@@ -25,7 +22,4 @@ public class Book
     public string Category { get; set; }
     public string Isbn { get; set; }
     public int PageCount { get; set; }
-
-    public virtual ICollection<Review> Reviews { get; set; } = [];
-    public virtual ICollection<InventoryLog> InventoryLogs { get; set; } = [];
 }

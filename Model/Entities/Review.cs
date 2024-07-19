@@ -1,17 +1,17 @@
-﻿namespace ChadsLibraryPortfolio.Model.Entities
+namespace ChadsLibraryPortfolio.Model.Entities;
+
+public class Review
 {
-    public class Review
+    public Review()
     {
-        public Review()
-        {
-            ReviewId = 0;
-            BookId = 0;
-            Rating = 0;
-            Description = string.Empty;
-        }
-        public int ReviewId { get; set; }
-        public int BookId { get; set; }
-        public int Rating { get; set; }
-        public string Description { get; set; }
+        this.ReviewId = 0;
+        this.BookId = 0;
+        this.Rating = 0;
+        this.Description = string.Empty;
     }
+    public int ReviewId { get; set; }
+    public int BookId { get; set; }
+    public Book? Book { get; set; }
+    public int Rating { get; set; }
+    public string Description { get; set; }
 }

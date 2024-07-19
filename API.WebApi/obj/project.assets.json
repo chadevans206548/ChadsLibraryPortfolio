@@ -1411,17 +1411,41 @@
           "bin/placeholder/Helpers.dll": {}
         }
       },
+      "Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Interfaces.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Interfaces.dll": {}
+        }
+      },
       "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.7"
+          "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.7"
         },
         "compile": {
           "bin/placeholder/Model.dll": {}
         },
         "runtime": {
           "bin/placeholder/Model.dll": {}
+        }
+      },
+      "ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ViewModels.dll": {}
         }
       }
     }
@@ -3874,10 +3898,20 @@
       "path": "../Helpers/Helpers.csproj",
       "msbuildProject": "../Helpers/Helpers.csproj"
     },
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../Interfaces/Interfaces.csproj",
+      "msbuildProject": "../Interfaces/Interfaces.csproj"
+    },
     "Model/1.0.0": {
       "type": "project",
       "path": "../Model/Model.csproj",
       "msbuildProject": "../Model/Model.csproj"
+    },
+    "ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../ViewModels/ViewModels.csproj",
+      "msbuildProject": "../ViewModels/ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3886,6 +3920,7 @@
       "AutoMapper >= 13.0.1",
       "FluentValidation.AspNetCore >= 11.3.0",
       "Helpers >= 1.0.0",
+      "Interfaces >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.7",
       "Microsoft.Extensions.DependencyInjection >= 8.0.0",
@@ -3924,6 +3959,9 @@
           "projectReferences": {
             "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\Helpers.csproj": {
               "projectPath": "C:\\Repos\\ChadsLibraryPortfolio\\Helpers\\Helpers.csproj"
+            },
+            "C:\\Repos\\ChadsLibraryPortfolio\\Interfaces\\Interfaces.csproj": {
+              "projectPath": "C:\\Repos\\ChadsLibraryPortfolio\\Interfaces\\Interfaces.csproj"
             },
             "C:\\Repos\\ChadsLibraryPortfolio\\Model\\Model.csproj": {
               "projectPath": "C:\\Repos\\ChadsLibraryPortfolio\\Model\\Model.csproj"
