@@ -29,21 +29,21 @@ public class BookController(IBookService bookService) : ControllerBase
 
     [HttpPost]
     [Route("AddBook")]
-    public async Task<BookViewModel> AddBook([FromBody] AddBookViewModel addBookViewModel)
+    public async Task<ActionResult<BookViewModel>> AddBook([FromBody] AddBookViewModel addBookViewModel)
     {
         return await this._bookService.AddBook(addBookViewModel);
     }
 
     [HttpDelete]
     [Route("DeleteBook/{bookId}")]
-    public async Task<bool> DeleteBook(int bookId)
+    public async Task<ActionResult<bool>> DeleteBook(int bookId)
     {
         return await this._bookService.DeleteBook(bookId);
     }
 
     [HttpPut]
     [Route("EditBook")]
-    public async Task<BookViewModel> EditBook([FromBody] EditBookViewModel editBookViewModel)
+    public async Task<ActionResult<BookViewModel>> EditBook([FromBody] EditBookViewModel editBookViewModel)
     {
         return await this._bookService.EditBook(editBookViewModel);
     }
