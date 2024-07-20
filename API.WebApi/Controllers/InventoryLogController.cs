@@ -1,11 +1,9 @@
-using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.WebApi.Controllers;
-[Authorize(Policy = Constants.AuthPolicy.AuthenticatedUser)]
+
 [Route("api/[controller]")]
 [ApiController]
 public class InventoryLogController(IInventoryLogService inventoryLogService) : ControllerBase

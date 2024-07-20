@@ -1,3 +1,4 @@
+using Bogus;
 using ChadsLibraryPortfolio.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 

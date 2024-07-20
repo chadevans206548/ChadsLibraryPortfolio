@@ -3,24 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.WebApi", "API.WebApi\API.WebApi.csproj", "{6CCE0218-F1B2-416F-B57D-CBA26E10B270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapper.Profiles", "AutoMapper.Profiles\AutoMapper.Profiles.csproj", "{2D3E8EE6-D0FA-46A0-A0D3-868F145ADC89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMapper.Profiles", "AutoMapper.Profiles\AutoMapper.Profiles.csproj", "{2D3E8EE6-D0FA-46A0-A0D3-868F145ADC89}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37297DA6-6A45-47DA-930E-BFEDCA053E4C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{C9BAA8E9-A61E-4269-AD10-5688DACE3CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{C9BAA8E9-A61E-4269-AD10-5688DACE3CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{49BD712D-B4A8-4905-9426-D0ED346A66D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{49BD712D-B4A8-4905-9426-D0ED346A66D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{61AE4094-E0B2-4C5C-8B29-F0F945634497}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{61AE4094-E0B2-4C5C-8B29-F0F945634497}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.WebApi", "API.WebApi\API.WebApi.csproj", "{1F9C9078-BBE8-4293-AD24-9047B191F47A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +32,6 @@ Global
 		{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3CFDAD6-1F55-4D4C-B856-D3016FF31E3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CCE0218-F1B2-416F-B57D-CBA26E10B270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CCE0218-F1B2-416F-B57D-CBA26E10B270}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CCE0218-F1B2-416F-B57D-CBA26E10B270}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CCE0218-F1B2-416F-B57D-CBA26E10B270}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED59F913-4AEE-4F23-BD63-EABAE4E3BD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +52,10 @@ Global
 		{61AE4094-E0B2-4C5C-8B29-F0F945634497}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61AE4094-E0B2-4C5C-8B29-F0F945634497}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61AE4094-E0B2-4C5C-8B29-F0F945634497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F9C9078-BBE8-4293-AD24-9047B191F47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F9C9078-BBE8-4293-AD24-9047B191F47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F9C9078-BBE8-4293-AD24-9047B191F47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F9C9078-BBE8-4293-AD24-9047B191F47A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

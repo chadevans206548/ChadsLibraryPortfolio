@@ -1,21 +1,19 @@
+using System.Reflection;
+using System.Text.Json.Serialization;
 using ChadsLibraryPortfolio.Helpers;
+using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using ChadsLibraryPortfolio.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.AspNetCore;
 using NSwag.Generation.Processors.Security;
-using System.Reflection;
-using System.Text.Json.Serialization;
 
-namespace ChadsLibraryPortfolio.API.WebApi;
+namespace API.WebApi;
 
 public class Startup
 {
@@ -37,6 +35,15 @@ public class Startup
         });
 
         services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
+
+        string appPath = AppDomain.CurrentDomain.BaseDirectory;
+        string jsonPath = Path.Combine(Directory.GetParent(Directory.GetParent(appPath).FullName).FullName, "appsettings.json");
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(appPath)
+            .AddJsonFile(jsonPath, optional: true, reloadOnChange: true)
+            .Build();
+
 
         var appSettingsSection = this.Configuration.GetSection("AppSettings");
         services.Configure<AppSettings>(appSettingsSection);
@@ -114,12 +121,51 @@ public class Startup
         //services.AddScoped<IHostingEnvironmentService, HostingEnvironmentService>();
         //services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
 
-        // DI FOR ENTITY FRAMEWORK DBCONTEXT GO BELOW HERE //
+        services.AddScoped<IBookService, BookService>();
+        services.AddScoped<ITestDataService, TestDataService>();
+        services.AddScoped<IInventoryLogService, InventoryLogService>();
+        services.AddScoped<IReviewService, ReviewService>();
+
+        //DI FOR ENTITY FRAMEWORK DBCONTEXT GO BELOW HERE //
         services.AddDbContext<LibraryContext>(options =>
         {
             options.UseSqlServer(this.Configuration.GetConnectionString(Constants.DbConnectionString));
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             options.EnableSensitiveDataLogging();
+        });
+        services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+        services.Configure<IdentityOptions>(options =>
+        {
+            // Password settings.
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 6;
+            options.Password.RequiredUniqueChars = 1;
+
+            // Lockout settings.
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.AllowedForNewUsers = true;
+
+            // User settings.
+            options.User.AllowedUserNameCharacters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            options.User.RequireUniqueEmail = false;
+        });
+
+        services.ConfigureApplicationCookie(options =>
+        {
+            // Cookie settings
+            options.Cookie.HttpOnly = true;
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+            options.LoginPath = "/Identity/Account/Login";
+            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            options.SlidingExpiration = true;
         });
 
         // These are located in the Extensions project
@@ -127,6 +173,11 @@ public class Startup
         services.AddAutoMappers();
 
         services.AddValidatorsFromAssembly(Assembly.Load("ViewModels"));
+
+        // Add services to the container.
+        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LibraryContext>();
+        services.AddControllersWithViews();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -154,6 +205,10 @@ public class Startup
         {
             endpoints.MapControllers();
         });
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseMiddleware<ExceptionMiddleware>();
     }
 }
 

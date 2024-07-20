@@ -1,12 +1,10 @@
-using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.Books;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.WebApi.Controllers;
 
-[Authorize(Policy = Constants.AuthPolicy.AuthenticatedUser)]
+
 [Route("api/[controller]")]
 [ApiController]
 public class BookController(IBookService bookService) : ControllerBase

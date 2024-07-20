@@ -3,6 +3,7 @@ public class EditBookViewModel
 {
     public EditBookViewModel()
     {
+        this.BookId = 0;
         this.Title = string.Empty;
         this.Author = string.Empty;
         this.Description = string.Empty;
@@ -13,6 +14,8 @@ public class EditBookViewModel
         this.Isbn = string.Empty;
         this.PageCount = 0;
     }
+
+    public int BookId { get; set; }
     public string Title { get; set; }
     public string Author { get; set; }
     public string Description { get; set; }

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+using ChadsLibraryPortfolio.Helpers;
+using ChadsLibraryPortfolio.Models;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace ChadsLibraryPortfolio.API.WebApi;
-
+namespace API.WebApi;
 public class Program
 {
     public static void Main(string[] args)
