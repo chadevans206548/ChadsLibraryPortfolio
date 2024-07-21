@@ -3,6 +3,8 @@ using ChadsLibraryPortfolio.Model.Entities;
 using ChadsLibraryPortfolio.ViewModels.Books;
 using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
+using FluentValidation.Results;
+using ViewModels.Common;
 
 namespace ChadsLibraryPortfolio.AutoMapper.Profiles;
 
@@ -97,6 +99,11 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.PageCount, opt => opt.MapFrom(src => src.PageCount))
             ;
         #endregion
+
+        this.CreateMap<ValidationResult, ValidationResultViewModel>()
+            .ForMember(dest => dest.IsValid, opt => opt.MapFrom(src => src.IsValid))
+            .ForMember(dest => dest.ErrorMessages, opt => opt.MapFrom(src => src.Errors.Select(x => x.ErrorMessage).ToList()))
+            ;
     }
 
     public class AverageUserRatingResolver : IValueResolver<Book, BookViewModel, decimal>

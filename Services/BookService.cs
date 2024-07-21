@@ -1,10 +1,12 @@
-using System.Net;
 using AutoMapper;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Model.Entities;
 using ChadsLibraryPortfolio.Models;
 using ChadsLibraryPortfolio.ViewModels.Books;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
+using ViewModels.Books.Validators;
+using ViewModels.Common;
 
 namespace ChadsLibraryPortfolio.Services;
 
@@ -15,16 +17,32 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
 
     public async Task<BookViewModel> AddBook(AddBookViewModel addBookViewModel)
     {
-        try
+        AddBookValidator validator = new AddBookValidator(this);
+        ValidationResult result = await validator.ValidateAsync(addBookViewModel);
+
+        if (result.IsValid)
         {
             var book = this._mapper.Map<Book>(addBookViewModel);
             var entity = await this._libraryContext.AddAsync(book);
             await this._libraryContext.SaveChangesAsync();
             return this._mapper.Map<BookViewModel>(entity.Entity);
         }
+        else
+        {
+            return new BookViewModel();
+        }
+    }
+
+    public async Task<ValidationResultViewModel> ValidateAddBook(AddBookViewModel addBookViewModel)
+    {
+        try
+        {
+            AddBookValidator validator = new AddBookValidator(this);
+            ValidationResult result = await validator.ValidateAsync(addBookViewModel);
+            return this._mapper.Map<ValidationResultViewModel>(result);
+        }
         catch (Exception e)
         {
-
             throw e;
         }
     }
@@ -44,11 +62,28 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
 
     public async Task<BookViewModel> EditBook(EditBookViewModel editBookViewModel)
     {
-        var entity = await this._libraryContext.Books.FirstOrDefaultAsync(x => x.BookId == editBookViewModel.BookId);
-        this._mapper.Map(editBookViewModel, entity);
-        this._libraryContext.Update(entity);
-        await this._libraryContext.SaveChangesAsync();
-        return this._mapper.Map<BookViewModel>(entity);
+        EditBookValidator validator = new EditBookValidator(this);
+        ValidationResult result = await validator.ValidateAsync(editBookViewModel);
+
+        if (result.IsValid)
+        {
+            var entity = await this._libraryContext.Books.FirstOrDefaultAsync(x => x.BookId == editBookViewModel.BookId);
+            this._mapper.Map(editBookViewModel, entity);
+            this._libraryContext.Update(entity);
+            await this._libraryContext.SaveChangesAsync();
+            return this._mapper.Map<BookViewModel>(entity);
+        }
+        else
+        {
+            return new BookViewModel();
+        }
+    }
+
+    public async Task<ValidationResultViewModel> ValidateEditBook(EditBookViewModel editBookViewModel)
+    {
+        EditBookValidator validator = new EditBookValidator(this);
+        ValidationResult result = await validator.ValidateAsync(editBookViewModel);
+        return this._mapper.Map<ValidationResultViewModel>(result);
     }
 
     public async Task<BookViewModel> GetBook(int bookId)
@@ -57,6 +92,26 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
             .Include(x => x.InventoryLogs)
             .Include(x => x.Reviews)
             .Where(x => x.BookId == bookId)
+            .FirstOrDefaultAsync();
+        return this._mapper.Map<BookViewModel>(book);
+    }
+
+    public async Task<BookViewModel> GetBookByTitle(string title)
+    {
+        var book = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .Where(x => x.Title.ToUpper() == title.ToUpper())
+            .FirstOrDefaultAsync();
+        return this._mapper.Map<BookViewModel>(book);
+    }
+
+    public async Task<BookViewModel> GetBookByIsbn(string isbn)
+    {
+        var book = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .Where(x => x.Isbn.ToUpper() == isbn.ToUpper())
             .FirstOrDefaultAsync();
         return this._mapper.Map<BookViewModel>(book);
     }

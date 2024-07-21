@@ -1,6 +1,7 @@
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
 using Microsoft.AspNetCore.Mvc;
+using ViewModels.Common;
 
 namespace API.WebApi.Controllers;
 
@@ -16,5 +17,12 @@ public class ReviewController(IReviewService reviewService) : ControllerBase
     public async Task<ActionResult<ReviewViewModel>> AddReview([FromBody] AddReviewViewModel addReviewViewModel)
     {
         return await this._reviewService.AddReview(addReviewViewModel);
+    }
+
+    [HttpPost]
+    [Route("ValidateAddReview")]
+    public async Task<ValidationResultViewModel> ValidateAddReview([FromBody] AddReviewViewModel addReviewViewModel)
+    {
+        return await this._reviewService.ValidateAddReview(addReviewViewModel);
     }
 }
