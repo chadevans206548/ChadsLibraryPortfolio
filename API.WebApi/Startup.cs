@@ -5,10 +5,8 @@ using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Models;
 using ChadsLibraryPortfolio.Services;
 using FluentValidation;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.AspNetCore;
 using NSwag.Generation.Processors.Security;
@@ -133,6 +131,12 @@ public class Startup
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             options.EnableSensitiveDataLogging();
         });
+        services.AddDbContext<SecurityDbContext>(options =>
+        {
+            options.UseSqlServer(this.Configuration.GetConnectionString(Constants.DbConnectionString));
+            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            options.EnableSensitiveDataLogging();
+        });
         services.AddDatabaseDeveloperPageExceptionFilter();
 
 
@@ -175,9 +179,13 @@ public class Startup
         services.AddValidatorsFromAssembly(Assembly.Load("ViewModels"));
 
         // Add services to the container.
-        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<LibraryContext>();
         services.AddControllersWithViews();
+
+        //services.AddIdentityApiEndpoints<User>();
+        //services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<SecurityDbContext>();
+        //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>();
+
+        services.AddAuthorization();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -196,8 +204,8 @@ public class Startup
             };
         });
 
-        app.UseCors("ChadsLibraryPortfolio");
         app.UseRouting();
+        app.UseCors("ChadsLibraryPortfolio");
         app.UseAuthentication();
         app.UseAuthorization();
 

@@ -1,8 +1,4 @@
-using ChadsLibraryPortfolio.Helpers;
-using ChadsLibraryPortfolio.Models;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.WebApi;
 public class Program
