@@ -217,6 +217,14 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseMiddleware<ExceptionMiddleware>();
+
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+
+            var context = services.GetRequiredService<LibraryContext>();
+            context.Database.Migrate();
+        }
     }
 }
 
