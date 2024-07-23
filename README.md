@@ -12,7 +12,7 @@ This application is a simple library scenario to serve as an example of a full-s
 - Package Manager: npm 10.7.0
 
 ### To get this up and running...
-1. I pull the repo and use the package manager console to update-database. I used SQL express and that connection string is found in the appsettings.json file in the API.WebAPI project.
+1. I used SQL express and that connection string is found in the appsettings.json file in the API.WebAPI project. Running the project will create the db and apply migrations.
 2. I run the API through Visual Studio IIS Express. I have the project set to open a browser window to swagger.
 3. To seed the database, I use swagger, navigate to the TestData controller and execute from there. I was fighting with the OnModelCreating running twice upon startup and decided finally that my time was better served moving the Bogus generation somewhere else than fix that obscure bug.
 4. For the front end, I use a VS Code terminal, npm install, ng serve. I used all default ports that Angular CLI typically generates.
