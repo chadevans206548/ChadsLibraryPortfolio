@@ -14,4 +14,6 @@ public interface IBookService
     Task<BookViewModel> GetBookByTitle(string title);
     Task<BookViewModel> GetBookByIsbn(string isbn);
     Task<List<string>> GetAllBookTitles();
+    Task<List<BookViewModel>> GetFeaturedBooks();
+    Task<List<BookViewModel>> GetAllBooks();
 }

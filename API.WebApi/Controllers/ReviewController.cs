@@ -1,4 +1,5 @@
 using ChadsLibraryPortfolio.Interfaces;
+using ChadsLibraryPortfolio.ViewModels.Books;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Common;
@@ -24,5 +25,12 @@ public class ReviewController(IReviewService reviewService) : ControllerBase
     public async Task<ValidationResultViewModel> ValidateAddReview([FromBody] AddReviewViewModel addReviewViewModel)
     {
         return await this._reviewService.ValidateAddReview(addReviewViewModel);
+    }
+
+    [HttpGet]
+    [Route("GetReviewsByBook/{bookId}")]
+    public async Task<List<ReviewViewModel>> GetReviewsByBook(int bookId)
+    {
+        return await this._reviewService.GetReviewsByBook(bookId);
     }
 }

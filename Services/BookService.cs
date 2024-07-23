@@ -35,16 +35,9 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
 
     public async Task<ValidationResultViewModel> ValidateAddBook(AddBookViewModel addBookViewModel)
     {
-        try
-        {
-            AddBookValidator validator = new AddBookValidator(this);
-            ValidationResult result = await validator.ValidateAsync(addBookViewModel);
-            return this._mapper.Map<ValidationResultViewModel>(result);
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
+        AddBookValidator validator = new AddBookValidator(this);
+        ValidationResult result = await validator.ValidateAsync(addBookViewModel);
+        return this._mapper.Map<ValidationResultViewModel>(result);
     }
 
     public async Task<bool> DeleteBook(int bookId)
@@ -94,6 +87,25 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
             .Where(x => x.BookId == bookId)
             .FirstOrDefaultAsync();
         return this._mapper.Map<BookViewModel>(book);
+    }
+
+    public async Task<List<BookViewModel>> GetFeaturedBooks()
+    {
+        var books = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .Where(x => x.Reviews.Sum(x => x.Rating) > 0)
+            .ToListAsync();
+        return this._mapper.Map<List<BookViewModel>>(books);
+    }
+
+    public async Task<List<BookViewModel>> GetAllBooks()
+    {
+        var books = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .ToListAsync();
+        return this._mapper.Map<List<BookViewModel>>(books);
     }
 
     public async Task<BookViewModel> GetBookByTitle(string title)

@@ -1,0 +1,16 @@
+.title {
+    font-weight: bold;
+    padding-right: 2vw;
+    text-align: right;
+    width: 50%;
+}
+
+.detail {
+    width: 50%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

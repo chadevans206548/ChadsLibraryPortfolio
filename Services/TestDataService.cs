@@ -17,6 +17,7 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
         }
 
         List<Book> books = [];
+        List<Review> reviews = [];
 
         Randomizer.Seed = new Random(20240719);
 
@@ -26,7 +27,7 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
            .RuleFor(book => book.Title, f => string.Join(" ", f.Random.Words(f.Random.Number(1, 3))))
            .RuleFor(book => book.Author, f => f.Name.FullName())
            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
-           .RuleFor(book => book.CoverImage, f => f.System.FilePath())
+           .RuleFor(book => book.CoverImage, f => f.Internet.Url())
            .RuleFor(book => book.Publisher, f => f.Company.CompanyName())
            .RuleFor(book => book.PublicationDate, f => f.Date.PastDateOnly(f.Random.Number(5, 25)))
            .RuleFor(book => book.Category, f => f.Random.Word())
@@ -39,6 +40,36 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
         books.AddRange(bookData);
 
         await this._libraryContext.AddRangeAsync(books);
+        await this._libraryContext.SaveChangesAsync();
+
+        var reviewFakerFirst = new Faker<Review>()
+            .RuleFor(book => book.BookId, _ => 1)
+            .RuleFor(book => book.Rating, f => f.Random.Number(1, 5))
+            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
+            ;
+
+        var reviewDataFirst = reviewFakerFirst.Generate(1);
+        reviews.AddRange(reviewDataFirst);
+
+        var reviewFakerSecond = new Faker<Review>()
+            .RuleFor(book => book.BookId, _ => 2)
+            .RuleFor(book => book.Rating, f => f.Random.Number(1, 5))
+            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
+            ;
+
+        var reviewDataSecond = reviewFakerSecond.Generate(2);
+        reviews.AddRange(reviewDataSecond);
+
+        var reviewFakerThird = new Faker<Review>()
+            .RuleFor(book => book.BookId, _ => 3)
+            .RuleFor(book => book.Rating, f => f.Random.Number(1, 5))
+            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
+            ;
+
+        var reviewDataThird = reviewFakerThird.Generate(3);
+        reviews.AddRange(reviewDataThird);
+
+        await this._libraryContext.AddRangeAsync(reviews);
         await this._libraryContext.SaveChangesAsync();
 
         return true;

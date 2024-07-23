@@ -1,4 +1,3 @@
-using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
 using ViewModels.Common;
 
@@ -7,4 +6,6 @@ public interface IReviewService
 {
     Task<ReviewViewModel> AddReview(AddReviewViewModel addReviewViewModel);
     Task<ValidationResultViewModel> ValidateAddReview(AddReviewViewModel addReviewViewModel);
+
+    Task<List<ReviewViewModel>> GetReviewsByBook(int bookId);
 }
