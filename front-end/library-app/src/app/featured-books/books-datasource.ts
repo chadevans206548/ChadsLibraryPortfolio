@@ -5,21 +5,7 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { Injectable } from '@angular/core';
-
-export interface BookViewModel {
-  bookId: number;
-  title: string;
-  author: string;
-  description: string;
-  coverImage: string;
-  publisher: string;
-  publicationDate: Date | null;
-  category: string;
-  isbn: string;
-  pageCount: number;
-  averageUserRating: number;
-  available: boolean;
-}
+import { BookViewModel } from '../interfaces';
 
 export class BooksViewModelDataSource extends DataSource<BookViewModel> {
   data: BookViewModel[] = [];

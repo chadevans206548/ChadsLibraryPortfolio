@@ -224,6 +224,9 @@ public class Startup
 
             var context = services.GetRequiredService<LibraryContext>();
             context.Database.Migrate();
+
+            var testData = services.GetRequiredService<TestDataService>();
+            testData.AddTestData();
         }
     }
 }

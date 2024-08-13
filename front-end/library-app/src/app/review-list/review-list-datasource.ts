@@ -3,14 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-
-export interface ReviewListItem {
-  reviewId: number;
-  bookId: number;
-  rating: number;
-  description: string;
-}
-
+import { ReviewListItem } from '../interfaces';
 
 /**
  * Data source for the ReviewList view. This class should

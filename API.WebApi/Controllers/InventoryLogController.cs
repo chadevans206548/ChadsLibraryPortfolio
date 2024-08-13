@@ -38,4 +38,18 @@ public class InventoryLogController(IInventoryLogService inventoryLogService) : 
     {
         return await this._inventoryLogService.ValidateEditInventory(editInventoryLogViewModel);
     }
+
+    [HttpPut]
+    [Route("Checkout")]
+    public async Task<bool> Checkout([FromBody] int bookId)
+    {
+        return await this._inventoryLogService.Checkout(bookId);
+    }
+
+    [HttpPut]
+    [Route("Checkin")]
+    public async Task<bool> Checkin([FromBody] int bookId)
+    {
+        return await this._inventoryLogService.Checkin(bookId);
+    }
 }

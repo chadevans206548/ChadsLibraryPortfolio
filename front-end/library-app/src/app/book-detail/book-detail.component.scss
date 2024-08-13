@@ -14,3 +14,10 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.topBar {
+    background-color: map-get($mat-primary, 500);
+    height: 64px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }

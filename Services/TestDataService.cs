@@ -2,16 +2,15 @@ using Bogus;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Model.Entities;
 using ChadsLibraryPortfolio.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ChadsLibraryPortfolio.Services;
 public class TestDataService(LibraryContext libraryContext) : ITestDataService
 {
     protected readonly LibraryContext _libraryContext = libraryContext;
 
-    public async Task<bool> AddTestData()
+    public bool AddTestData()
     {
-        if (await this._libraryContext.Books.CountAsync() >= 10)
+        if (this._libraryContext.Books.Count() >= 10)
         {
             return false;
         }
@@ -21,9 +20,7 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
 
         Randomizer.Seed = new Random(20240719);
 
-        var bookId = 1;
         var bookFaker = new Faker<Book>()
-           //.RuleFor(book => book.BookId, _ => bookId++)
            .RuleFor(book => book.Title, f => string.Join(" ", f.Random.Words(f.Random.Number(1, 3))))
            .RuleFor(book => book.Author, f => f.Name.FullName())
            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
@@ -39,8 +36,8 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
 
         books.AddRange(bookData);
 
-        await this._libraryContext.AddRangeAsync(books);
-        await this._libraryContext.SaveChangesAsync();
+        this._libraryContext.AddRange(books);
+        this._libraryContext.SaveChanges();
 
         var reviewFakerFirst = new Faker<Review>()
             .RuleFor(book => book.BookId, _ => 1)
@@ -69,8 +66,8 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
         var reviewDataThird = reviewFakerThird.Generate(3);
         reviews.AddRange(reviewDataThird);
 
-        await this._libraryContext.AddRangeAsync(reviews);
-        await this._libraryContext.SaveChangesAsync();
+        this._libraryContext.AddRange(reviews);
+        this._libraryContext.SaveChanges();
 
         return true;
     }

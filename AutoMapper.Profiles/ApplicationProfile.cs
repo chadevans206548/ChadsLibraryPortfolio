@@ -54,6 +54,15 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.CheckinDate, opt => opt.MapFrom(src => src.CheckinDate))
             .ForMember(dest => dest.DueDate, opt => opt.MapFrom(src => src.DueDate))
             ;
+
+        this.CreateMap<Book, AddInventoryLogViewModel>()
+            .ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
+            .ForMember(dest => dest.User, opt => opt.Ignore())
+            .ForMember(dest => dest.CheckoutDate, opt => opt.MapFrom(src => DateTime.Today))
+            .ForMember(dest => dest.CheckinDate, opt => opt.Ignore())
+            .ForMember(dest => dest.DueDate, opt => opt.MapFrom(src => DateTime.Today.AddDays(5)))
+            ;
+
         #endregion
 
         #region Book
@@ -68,8 +77,6 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
             .ForMember(dest => dest.Isbn, opt => opt.MapFrom(src => src.Isbn))
             .ForMember(dest => dest.PageCount, opt => opt.MapFrom(src => src.PageCount))
-            //.ForMember(dest => dest.AverageUserRating, opt => opt.Ignore())
-            //.ForMember(dest => dest.Available, opt => opt.Ignore())
             .ForMember(dest => dest.AverageUserRating, opt => opt.MapFrom<AverageUserRatingResolver>())
             .ForMember(dest => dest.Available, opt => opt.MapFrom<BookAvailableResolver>())
             ;

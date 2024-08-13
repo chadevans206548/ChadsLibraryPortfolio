@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { BookViewModel } from '../featured-books/books-datasource';
 import { DatePipe } from '@angular/common';
-import { ReviewListComponent } from "../review-list/review-list.component";
+import { ReviewListComponent } from '../review-list/review-list.component';
 
 @Component({
   selector: 'app-book-detail',
@@ -31,5 +31,19 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
     this.dataService.getBook(this.bookId).subscribe((x) => {
       this.book = x;
     });
+  }
+
+  checkout() {
+    if (this.book.available) {
+      this.dataService.checkout(this.bookId);
+      this.book.available = false;
+    }
+  }
+
+  checkin() {
+    if (!this.book.available) {
+      this.dataService.checkin(this.bookId);
+      this.book.available = true;
+    }
   }
 }

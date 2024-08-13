@@ -64,4 +64,59 @@ public class InventoryLogService(LibraryContext libraryContext, IMapper mapper, 
         ValidationResult result = await validator.ValidateAsync(editInventoryLogViewModel);
         return this._mapper.Map<ValidationResultViewModel>(result);
     }
+
+    public async Task<bool> Checkout(int bookId)
+    {
+        var book = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .Where(x => x.BookId == bookId)
+            .FirstOrDefaultAsync();
+
+        if (book != null)
+        {
+            var lastLog = await this._libraryContext.InventoryLogs
+                .OrderByDescending(x => x.CheckoutDate)
+                .Where(x => x.BookId == bookId && !x.CheckinDate.HasValue)
+                .FirstOrDefaultAsync();
+
+            if (lastLog == null) //This book is in stock
+            {
+                var addLog = new AddInventoryLogViewModel();
+                this._mapper.Map(book, addLog);
+                addLog.User = "test person replace me";
+                var entity = await this._libraryContext.AddAsync(addLog);
+                await this._libraryContext.SaveChangesAsync();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public async Task<bool> Checkin(int bookId)
+    {
+        var book = await this._libraryContext.Books
+            .Include(x => x.InventoryLogs)
+            .Include(x => x.Reviews)
+            .Where(x => x.BookId == bookId)
+            .FirstOrDefaultAsync();
+
+        if (book != null)
+        {
+            var lastLog = await this._libraryContext.InventoryLogs
+                .OrderByDescending(x => x.CheckoutDate)
+                .Where(x => x.BookId == bookId && !x.CheckinDate.HasValue)
+                .FirstOrDefaultAsync();
+
+            if (lastLog != null) //This book is checked out
+            {
+                lastLog.CheckinDate = DateTime.Now;
+                await this._libraryContext.SaveChangesAsync();
+                return true;
+            }
+
+        }
+        return false;
+
+    }
 }
