@@ -131,14 +131,9 @@ public class Startup
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             options.EnableSensitiveDataLogging();
         });
-        services.AddDbContext<SecurityDbContext>(options =>
-        {
-            options.UseSqlServer(this.Configuration.GetConnectionString(Constants.DbConnectionString));
-            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            options.EnableSensitiveDataLogging();
-        });
         services.AddDatabaseDeveloperPageExceptionFilter();
 
+        services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<LibraryContext>();
 
         services.Configure<IdentityOptions>(options =>
         {
@@ -222,11 +217,11 @@ public class Startup
         {
             var services = scope.ServiceProvider;
 
-            var context = services.GetRequiredService<LibraryContext>();
-            context.Database.Migrate();
+            var libraryContext = services.GetRequiredService<LibraryContext>();
+            libraryContext.Database.Migrate();
 
-            var testData = services.GetRequiredService<TestDataService>();
-            testData.AddTestData();
+            var testData = services.GetService<TestDataService>();
+            testData?.AddTestData();
         }
     }
 }

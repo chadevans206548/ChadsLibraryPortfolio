@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20240813200251_InsertedRoles.cs" />
+    <Compile Remove="Migrations\20240813200251_InsertedRoles.Designer.cs" />
+    <Compile Remove="Migrations\20240813203548_CreatingIdentityScheme.cs" />
+    <Compile Remove="Migrations\20240813203548_CreatingIdentityScheme.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="35.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />

@@ -1,10 +1,12 @@
 using AutoMapper;
 using ChadsLibraryPortfolio.Model.Entities;
+using ChadsLibraryPortfolio.Models;
 using ChadsLibraryPortfolio.ViewModels.Books;
 using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
 using FluentValidation.Results;
 using ViewModels.Common;
+using ViewModels.User;
 
 namespace ChadsLibraryPortfolio.AutoMapper.Profiles;
 
@@ -12,6 +14,12 @@ public class ApplicationProfile : Profile
 {
     public ApplicationProfile()
     {
+        #region Registration
+        this.CreateMap<AddUserViewModel, User>()
+            .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+        #endregion
+
+
         #region Review
         this.CreateMap<Review, ReviewViewModel>()
             .ForMember(dest => dest.ReviewId, opt => opt.MapFrom(src => src.ReviewId))

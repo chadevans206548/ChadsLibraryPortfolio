@@ -1,10 +1,12 @@
-using Bogus;
 using ChadsLibraryPortfolio.Model.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ChadsLibraryPortfolio.Models;
 
-public class LibraryContext(DbContextOptions<LibraryContext> options) : DbContext(options)
+public class LibraryContext(DbContextOptions<LibraryContext> options) : IdentityDbContext<User>(options)
 {
     public DbSet<Book> Books { get; set; }
     public DbSet<Review> Reviews { get; set; }
@@ -12,6 +14,9 @@ public class LibraryContext(DbContextOptions<LibraryContext> options) : DbContex
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
         modelBuilder.Entity<Book>(entity =>
         {
             entity.HasKey(prop => prop.BookId);
@@ -48,6 +53,30 @@ public class LibraryContext(DbContextOptions<LibraryContext> options) : DbContex
             entity.Property(prop => prop.CheckoutDate).HasColumnType("DATE");
             entity.Property(prop => prop.CheckinDate).HasColumnType("DATE");
             entity.Property(prop => prop.DueDate).HasColumnType("DATE");
+        });
+    }
+}
+
+public class User : IdentityUser
+{
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+}
+
+public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+{
+    public void Configure(EntityTypeBuilder<IdentityRole> builder)
+    {
+        builder.HasData(
+        new IdentityRole
+        {
+            Name = "Librarian",
+            NormalizedName = "LIBRARIAN"
+        },
+        new IdentityRole
+        {
+            Name = "Customer",
+            NormalizedName = "CUSTOMER"
         });
     }
 }
