@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import {
-  BooksViewModelDataSource,
-  BookViewModel,
-} from './books-datasource';
+import { BooksViewModelDataSource } from './books-datasource';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
+import { BookViewModel } from '../interfaces';
 
 @Component({
   selector: 'app-featured-books',
@@ -25,9 +23,7 @@ export class FeaturedBooksComponent implements OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['title', 'author', 'description', 'rating', 'action'];
 
-  constructor(private dataService: DataService,
-    private router: Router,
-  ) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
     this.dataService.getFeaturedBooks().subscribe((x) => {

@@ -1,0 +1,82 @@
+<mat-card
+  style="
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-card-subtitle><h5>Register</h5></mat-card-subtitle>
+  <mat-card-content>
+    <form
+      [formGroup]="registerForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="registerUser(registerForm.value)"
+    >
+      <div class="m-1">
+        <label for="firstName">First Name:</label>
+        <div>
+          <input type="text" id="firstName" formControlName="firstName" />
+        </div>
+      </div>
+      <div class="m-1">
+        <label for="lastName">Last Name:</label>
+        <div>
+          <input type="text" id="lastName" formControlName="lastName" />
+        </div>
+      </div>
+      <div class="m-1">
+        <label for="email">Email:</label>
+        <div>
+          <input type="email" id="email" formControlName="email" />
+        </div>
+        <div>
+          <em *ngIf="validateControl('email') && hasError('email', 'email')"
+            >Please provide a valid email</em
+          >
+          <em *ngIf="validateControl('email') && hasError('email', 'required')"
+            >Email is required</em
+          >
+        </div>
+      </div>
+      <div class="m-1">
+        <label for="password">Password:</label>
+        <div>
+          <input type="password" id="password" formControlName="password" />
+        </div>
+        <div>
+          <em
+            *ngIf="
+              validateControl('password') && hasError('password', 'required')
+            "
+            >Password is required</em
+          >
+        </div>
+      </div>
+      <div class="m-1" style="font-size: small;">
+        <em>Passwords must:
+          <ul>
+            <li>be at least 6 characters</li>
+            <li>contain a number</li>
+            <li>contain a special character</li>
+            <li>contain both upper and lower case letters</li>
+          </ul>
+        </em>
+      </div>
+      <br />
+      <div>
+        <div>
+          <button
+            mat-raised-button
+            type="submit"
+            [disabled]="!registerForm.valid"
+          >
+            Register
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

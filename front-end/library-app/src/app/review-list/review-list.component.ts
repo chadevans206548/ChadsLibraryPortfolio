@@ -8,9 +8,10 @@ import {
 import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import { ReviewListDataSource, ReviewListItem } from './review-list-datasource';
+import { ReviewListDataSource } from './review-list-datasource';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReviewListItem } from '../interfaces';
 
 @Component({
   selector: 'app-review-list',

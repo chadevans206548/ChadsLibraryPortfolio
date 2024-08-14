@@ -4,10 +4,11 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import {
   BooksViewModelDataSource,
-  BookViewModel,
+  
 } from '../featured-books/books-datasource';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
+import { BookViewModel } from '../interfaces';
 
 @Component({
   selector: 'app-search-books',

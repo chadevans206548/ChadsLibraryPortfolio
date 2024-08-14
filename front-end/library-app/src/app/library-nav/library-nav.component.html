@@ -1,4 +1,29 @@
-<mat-sidenav-container class="sidenav-container">
+<div class="topMenuBar">
+  <div class="column">
+  <p class="appTitle">Chad's Library Portfolio</p>
+</div>
+  <button mat-button [matMenuTriggerFor]="librarianMenu" class="menuButton">Librarians</button>
+  <mat-menu #librarianMenu="matMenu" yPosition="below">
+    <a mat-button routerLink="manage" routerLinkActive="activebutton"
+      >Manage Books</a
+    >
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="customerMenu" class="menuButton">Customers</button>
+  <mat-menu #customerMenu="matMenu" yPosition="below">
+    <a mat-button routerLink="featured" routerLinkActive="activebutton"
+      >Featured Books</a
+    >
+    <a mat-button routerLink="search" routerLinkActive="activebutton"
+      >Search Books</a
+    >
+  </mat-menu>
+
+  <a mat-button routerLink="register" routerLinkActive="activebutton"  class="menuButton"
+  >Register</a
+>
+</div>
+<!-- <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer mode="over" class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -27,4 +52,4 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

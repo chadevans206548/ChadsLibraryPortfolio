@@ -220,7 +220,7 @@ public class Startup
             var libraryContext = services.GetRequiredService<LibraryContext>();
             libraryContext.Database.Migrate();
 
-            var testData = services.GetService<TestDataService>();
+            var testData = services.GetRequiredService<ITestDataService>();
             testData?.AddTestData();
         }
     }

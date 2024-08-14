@@ -5,8 +5,14 @@ import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 export const routes: Routes = [
+  {
+    path: 'register',
+    component: RegisterUserComponent,
+    data: {},
+  },
   {
     path: 'featured',
     component: FeaturedBooksComponent,

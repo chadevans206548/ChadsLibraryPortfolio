@@ -20,4 +20,15 @@ export interface ReviewListItem {
     available: boolean;
   }
 
-  
+  export interface AddUserViewModel {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+export interface RegistrationResponseViewModel {
+  isSuccessfulRegistration: boolean;
+  errros: string[];
+}

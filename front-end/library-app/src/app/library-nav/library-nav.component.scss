@@ -15,3 +15,28 @@
   top: 0;
   z-index: 1;
 }
+
+.topMenuBar {
+  background-color: #1573ba;
+  display: flex;
+}
+
+.menuButton {
+  color: white !important;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.appTitle {
+  color: white !important;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
