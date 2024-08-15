@@ -1,40 +1,34 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableModule, MatTable } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSortModule, MatSort } from '@angular/material/sort';
-import { BooksViewModelDataSource } from './books-datasource';
+import { Component, OnInit } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { BookViewModel } from '../interfaces';
 import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-featured-books',
   templateUrl: './featured-books.component.html',
   styleUrl: './featured-books.component.scss',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    CommonModule,
+    MatButton,
+  ],
 })
 export class FeaturedBooksComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<BookViewModel>;
-  dataSource = new BooksViewModelDataSource([]);
   books: BookViewModel[] = [];
-
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['title', 'author', 'description', 'rating', 'action'];
 
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
     this.dataService.getFeaturedBooks().subscribe((x) => {
-      this.dataSource = new BooksViewModelDataSource(x);
       this.books = x;
-
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.table.dataSource = this.dataSource;
     });
   }
 

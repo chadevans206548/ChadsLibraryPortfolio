@@ -42,15 +42,17 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
 
   checkout() {
     if (this.book && this.book.available) {
-      this.dataService.checkout(this.bookId);
-      this.book.available = false;
+      this.dataService.checkout(this.bookId).subscribe((x) => {
+        this.book!.available = x == 0;  
+      })
     }
   }
 
   checkin() {
     if (this.book && !this.book.available) {
-      this.dataService.checkin(this.bookId);
-      this.book.available = true;
+      this.dataService.checkin(this.bookId).subscribe((x) => {
+        this.book!.available = x > 0;  
+      })
     }
   }
 }

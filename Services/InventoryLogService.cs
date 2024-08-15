@@ -1,3 +1,4 @@
+using System.Xml;
 using AutoMapper;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Model.Entities;
@@ -65,7 +66,7 @@ public class InventoryLogService(LibraryContext libraryContext, IMapper mapper, 
         return this._mapper.Map<ValidationResultViewModel>(result);
     }
 
-    public async Task<bool> Checkout(int bookId)
+    public async Task<int> Checkout(int bookId)
     {
         var book = await this._libraryContext.Books
             .Include(x => x.InventoryLogs)
@@ -82,18 +83,18 @@ public class InventoryLogService(LibraryContext libraryContext, IMapper mapper, 
 
             if (lastLog == null) //This book is in stock
             {
-                var addLog = new AddInventoryLogViewModel();
+                var addLog = new InventoryLog();
                 this._mapper.Map(book, addLog);
                 addLog.User = "test person replace me";
                 var entity = await this._libraryContext.AddAsync(addLog);
                 await this._libraryContext.SaveChangesAsync();
-                return true;
+                return entity.Entity.InventoryLogId;
             }
         }
-        return false;
+        return 0;
     }
 
-    public async Task<bool> Checkin(int bookId)
+    public async Task<int> Checkin(int bookId)
     {
         var book = await this._libraryContext.Books
             .Include(x => x.InventoryLogs)
@@ -111,12 +112,14 @@ public class InventoryLogService(LibraryContext libraryContext, IMapper mapper, 
             if (lastLog != null) //This book is checked out
             {
                 lastLog.CheckinDate = DateTime.Now;
+                this._libraryContext.Entry(lastLog).State = EntityState.Modified;
+
                 await this._libraryContext.SaveChangesAsync();
-                return true;
+                return lastLog.InventoryLogId;
             }
 
         }
-        return false;
+        return 0;
 
     }
 }

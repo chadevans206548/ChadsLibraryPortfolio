@@ -9,7 +9,7 @@ public interface IInventoryLogService
     Task<ValidationResultViewModel> ValidateAddInventoryLog(AddInventoryLogViewModel addInventoryLogViewModel);
     Task<ValidationResultViewModel> ValidateEditInventory(EditInventoryLogViewModel editInventoryLogViewModel);
 
-    Task<bool> Checkout(int bookId);
+    Task<int> Checkout(int bookId);
 
-    Task<bool> Checkin(int bookId);
+    Task<int> Checkin(int bookId);
 }

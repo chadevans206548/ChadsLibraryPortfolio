@@ -1,3 +1,14 @@
-.full-width-table {
+.full-width {
   width: 100%;
+}
+
+.full-margin {
+  margin: 1vw;
+}
+
+.book-view {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  gap: 4vw;
 }

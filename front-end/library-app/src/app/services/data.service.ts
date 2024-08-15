@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DestroyRef, Inject, Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BookViewModel, ReviewListItem } from '../interfaces';
@@ -51,19 +51,17 @@ export class DataService {
     let url_ = this.baseUrl + '/InventoryLog/Checkout';
     if (bookId === undefined || bookId === null)
       throw new Error("The parameter 'bookId' must be defined.");
-    url_ = url_.replace('{bookId}', encodeURIComponent('' + bookId));
-    url_ = url_.replace(/[?&]$/, '');
 
-    return this.http.put<number>(url_, bookId);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<number>(url_, bookId, {headers});
   }
 
   checkin(bookId: number) {
     let url_ = this.baseUrl + '/InventoryLog/Checkin';
     if (bookId === undefined || bookId === null)
       throw new Error("The parameter 'bookId' must be defined.");
-    url_ = url_.replace('{bookId}', encodeURIComponent('' + bookId));
-    url_ = url_.replace(/[?&]$/, '');
 
-    return this.http.put<number>(url_, bookId);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<number>(url_, bookId, {headers});
   }
 }

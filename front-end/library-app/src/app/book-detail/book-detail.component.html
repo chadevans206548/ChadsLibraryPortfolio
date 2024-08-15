@@ -1,50 +1,66 @@
 <div>
   <div class="topBar">
-    <button mat-raised-button class="ml-05" (click)="checkout()" [disabled]="!book?.available || isLibrarian">
+    <button
+      mat-raised-button
+      class="ml-05"
+      (click)="checkout()"
+      [disabled]="!book?.available || isLibrarian"
+    >
       Checkout
     </button>
-    <button mat-raised-button class="ml-05" (click)="checkin()" [disabled]="book?.available || !isLibrarian">
+    <button
+      mat-raised-button
+      class="ml-05"
+      (click)="checkin()"
+      [disabled]="book?.available || !isLibrarian"
+    >
       Checkin
     </button>
   </div>
   <h5>Book detail</h5>
-
-  <div class="row">
-    <span class="title">Title:</span
-    ><span class="detail">{{ book?.title }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Author:</span>
-    <span class="detail">{{ book?.author }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Description:</span>
-    <span class="detail">{{ book?.description }}</span>
-  </div>
-  <!-- <span class="title">coverImage:</span></div> -->
-  <div class="row">
-    <span class="title">Publisher:</span>
-    <span class="detail">{{ book?.publisher }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Category:</span>
-    <span class="detail">{{ book?.category }}</span>
-  </div>
-  <div class="row">
-    <span class="title">ISBN:</span>
-    <span class="detail">{{ book?.isbn }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Page count:</span>
-    <span class="detail">{{ book?.pageCount }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Average reader rating:</span>
-    <span class="detail">{{ book?.averageUserRating }}</span>
-  </div>
-  <div class="row">
-    <span class="title">Available:</span>
-    <span class="detail">{{ book?.available }}</span>
+  <div style="display: flex; margin-bottom: 4vh;">
+    <div style="flex-direction: column">
+      <div class="row">
+        <span class="title">Title:</span>
+        <span class="detail">{{ book?.title }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Author:</span>
+        <span class="detail">{{ book?.author }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Description:</span>
+        <span class="detail">{{ book?.description }}</span>
+      </div>
+      <!-- <span class="title">coverImage:</span></div> -->
+      <div class="row">
+        <span class="title">Publisher:</span>
+        <span class="detail">{{ book?.publisher }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Category:</span>
+        <span class="detail">{{ book?.category }}</span>
+      </div>
+      <div class="row">
+        <span class="title">ISBN:</span>
+        <span class="detail">{{ book?.isbn }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Page count:</span>
+        <span class="detail">{{ book?.pageCount }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Average reader rating:</span>
+        <span class="detail">{{ book?.averageUserRating }}/5</span>
+      </div>
+      <div class="row">
+        <span class="title">Available:</span>
+        <span class="detail">{{ book?.available }}</span>
+      </div>
+    </div>
+    <div style="flex-direction: column">
+      <img src="{{ book?.coverImage }}" width="200" height="200" />
+    </div>
   </div>
   <h5>Book Reviews</h5>
   <app-review-list [bookId]="bookId"></app-review-list>

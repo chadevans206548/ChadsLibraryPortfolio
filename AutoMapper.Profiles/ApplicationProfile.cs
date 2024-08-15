@@ -63,7 +63,7 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.DueDate, opt => opt.MapFrom(src => src.DueDate))
             ;
 
-        this.CreateMap<Book, AddInventoryLogViewModel>()
+        this.CreateMap<Book, InventoryLog>()
             .ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
             .ForMember(dest => dest.User, opt => opt.Ignore())
             .ForMember(dest => dest.CheckoutDate, opt => opt.MapFrom(src => DateTime.Today))

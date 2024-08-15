@@ -42,7 +42,6 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("AddBook")]
     public async Task<ActionResult<BookViewModel>> AddBook([FromBody] AddBookViewModel addBookViewModel)
     {
@@ -50,7 +49,6 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("ValidateAddBook")]
     public async Task<ValidationResultViewModel> ValidateAddBook([FromBody] AddBookViewModel addBookViewModel)
     {
@@ -58,7 +56,6 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpDelete]
-    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("DeleteBook/{bookId}")]
     public async Task<ActionResult<bool>> DeleteBook(int bookId)
     {
@@ -66,7 +63,6 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpPut]
-    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("EditBook")]
     public async Task<ActionResult<BookViewModel>> EditBook([FromBody] EditBookViewModel editBookViewModel)
     {
@@ -74,7 +70,6 @@ public class BookController(IBookService bookService) : ControllerBase
     }
 
     [HttpPut]
-    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("ValidateEditBook")]
     public async Task<ValidationResultViewModel> ValidateEditBook([FromBody] EditBookViewModel editBookViewModel)
     {
