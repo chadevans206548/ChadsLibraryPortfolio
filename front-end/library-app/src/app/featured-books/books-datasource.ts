@@ -3,8 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { DataService } from '../services/data.service';
-import { Injectable } from '@angular/core';
 import { BookViewModel } from '../interfaces';
 
 export class BooksViewModelDataSource extends DataSource<BookViewModel> {
