@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,7 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-library-nav',
@@ -28,15 +34,32 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     RouterLinkActive,
     MatButtonModule,
     MatMenuModule,
+    CommonModule,
   ],
 })
 export class LibraryNavComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  public isUserAuthenticated: boolean = false;
+  public isUserLibrarian: boolean = false;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {
+    this.authService.authChanged.subscribe((res) => {
+      this.isUserAuthenticated = res;
+    });
+    this.isUserLibrarian = this.authService.isUserLibrarian();
+  }
+
+  ngOnInit(): void {
+    this.authService.authChanged.subscribe((res) => {
+      this.isUserAuthenticated = res;
+      this.isUserLibrarian = this.authService.isUserLibrarian();
+    });
+  }
+
+  public logout = () => {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  };
 }

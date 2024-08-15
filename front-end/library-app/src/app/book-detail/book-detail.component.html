@@ -1,9 +1,9 @@
 <div>
   <div class="topBar">
-    <button mat-raised-button class="ml-05" (click)="checkout()" [disabled]="!book?.available">
+    <button mat-raised-button class="ml-05" (click)="checkout()" [disabled]="!book?.available || isLibrarian">
       Checkout
     </button>
-    <button mat-raised-button class="ml-05" (click)="checkin()" [disabled]="book?.available">
+    <button mat-raised-button class="ml-05" (click)="checkin()" [disabled]="book?.available || !isLibrarian">
       Checkin
     </button>
   </div>

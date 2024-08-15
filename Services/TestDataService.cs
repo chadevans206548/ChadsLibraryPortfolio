@@ -24,7 +24,7 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
            .RuleFor(book => book.Title, f => string.Join(" ", f.Random.Words(f.Random.Number(1, 3))))
            .RuleFor(book => book.Author, f => f.Name.FullName())
            .RuleFor(book => book.Description, f => f.Lorem.Sentence())
-           .RuleFor(book => book.CoverImage, f => f.Internet.Url())
+           .RuleFor(book => book.CoverImage, f => f.Image.PicsumUrl(200, 200, false, false, f.Random.Number(100, 999)))
            .RuleFor(book => book.Publisher, f => f.Company.CompanyName())
            .RuleFor(book => book.PublicationDate, f => f.Date.PastDateOnly(f.Random.Number(5, 25)))
            .RuleFor(book => book.Category, f => f.Random.Word())

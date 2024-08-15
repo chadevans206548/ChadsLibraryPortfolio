@@ -1,11 +1,10 @@
 using ChadsLibraryPortfolio.Interfaces;
-using ChadsLibraryPortfolio.ViewModels.Books;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Common;
 
 namespace API.WebApi.Controllers;
-
 
 [Route("api/[controller]")]
 [ApiController]

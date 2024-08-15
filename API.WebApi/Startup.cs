@@ -1,12 +1,15 @@
 using System.Reflection;
+using System.Text;
 using System.Text.Json.Serialization;
 using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Models;
 using ChadsLibraryPortfolio.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.AspNetCore;
 using NSwag.Generation.Processors.Security;
@@ -113,16 +116,12 @@ public class Startup
         //services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
 
         // DI FOR SERVICES GO BELOW HERE //
-        //services.AddScoped<IIdentityService, IdentityService>();
-        //services.AddScoped<IAuthorizationService, AuthorizationService>();
-        //services.AddScoped<ITransactionCoordinator, SQLTransactionCoordinator>();
-        //services.AddScoped<IHostingEnvironmentService, HostingEnvironmentService>();
-        //services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
-
         services.AddScoped<IBookService, BookService>();
         services.AddScoped<ITestDataService, TestDataService>();
         services.AddScoped<IInventoryLogService, InventoryLogService>();
         services.AddScoped<IReviewService, ReviewService>();
+        services.AddScoped<Services.AuthenticationService>();
+
 
         //DI FOR ENTITY FRAMEWORK DBCONTEXT GO BELOW HERE //
         services.AddDbContext<LibraryContext>(options =>
@@ -154,6 +153,26 @@ public class Startup
             options.User.AllowedUserNameCharacters =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             options.User.RequireUniqueEmail = false;
+        });
+
+        var jwtSettings = this.Configuration.GetSection("JwtSettings");
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings["validIssuer"],
+                ValidAudience = jwtSettings["validAudience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                    .GetBytes(jwtSettings.GetSection("securityKey").Value))
+            };
         });
 
         services.ConfigureApplicationCookie(options =>

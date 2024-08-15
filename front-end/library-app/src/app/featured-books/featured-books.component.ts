@@ -6,19 +6,21 @@ import { BooksViewModelDataSource } from './books-datasource';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { BookViewModel } from '../interfaces';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-featured-books',
   templateUrl: './featured-books.component.html',
   styleUrl: './featured-books.component.scss',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule],
 })
 export class FeaturedBooksComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<BookViewModel>;
   dataSource = new BooksViewModelDataSource([]);
+  books: BookViewModel[] = [];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['title', 'author', 'description', 'rating', 'action'];
@@ -28,6 +30,7 @@ export class FeaturedBooksComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getFeaturedBooks().subscribe((x) => {
       this.dataSource = new BooksViewModelDataSource(x);
+      this.books = x;
 
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

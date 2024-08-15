@@ -25,10 +25,21 @@ export interface ReviewListItem {
     lastName: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    role: string;
 }
 
 export interface RegistrationResponseViewModel {
   isSuccessfulRegistration: boolean;
   errros: string[];
+}
+
+export interface AuthenticateUserViewModel {
+  email: string;
+  password: string;
+}
+
+export interface AuthenticationResponseViewModel {
+  isAuthSuccessful: boolean;
+  errorMessage: string;
+  token: string;
 }

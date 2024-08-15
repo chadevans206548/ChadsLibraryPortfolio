@@ -1,6 +1,18 @@
-<div>
+<div style="margin: 1vw;">
   <h5>Featured Books</h5>
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+
+  <div *ngFor="let book of books">
+    {{ book.title }} by <em>{{ book.author }}</em><br />
+    {{ book.description }}<br />
+    {{ book.averageUserRating }}<br />
+    <div>
+      <img src='{{ book.coverImage }}' width="200" height="200">
+      </div>
+
+      
+  </div>
+
+  <!-- <table mat-table class="full-width-table" matSort aria-label="Elements">
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
       <td mat-cell *matCellDef="let row">{{row.title}}</td>
@@ -40,5 +52,5 @@
       [pageSize]="10"
       [pageSizeOptions]="[5, 10, 20]"
       aria-label="Select page">
-  </mat-paginator>
+  </mat-paginator> -->
 </div>

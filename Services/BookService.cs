@@ -5,7 +5,7 @@ using ChadsLibraryPortfolio.Models;
 using ChadsLibraryPortfolio.ViewModels.Books;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
-using ViewModels.Books.Validators;
+using Validation;
 using ViewModels.Common;
 
 namespace ChadsLibraryPortfolio.Services;

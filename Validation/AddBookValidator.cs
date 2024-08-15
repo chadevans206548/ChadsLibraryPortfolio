@@ -2,7 +2,7 @@ using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.Books;
 using FluentValidation;
 
-namespace ViewModels.Books.Validators;
+namespace Validation;
 public class AddBookValidator : AbstractValidator<AddBookViewModel>
 {
     private readonly IBookService _bookService;

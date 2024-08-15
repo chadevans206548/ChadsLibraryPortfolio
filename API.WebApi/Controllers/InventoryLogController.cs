@@ -1,5 +1,7 @@
+using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.InventoryLogs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Common;
 
@@ -40,6 +42,7 @@ public class InventoryLogController(IInventoryLogService inventoryLogService) : 
     }
 
     [HttpPut]
+    [Authorize(Roles = Constants.AuthPolicy.CustomerUser)]
     [Route("Checkout")]
     public async Task<bool> Checkout([FromBody] int bookId)
     {
@@ -47,6 +50,7 @@ public class InventoryLogController(IInventoryLogService inventoryLogService) : 
     }
 
     [HttpPut]
+    [Authorize(Roles = Constants.AuthPolicy.LibrarianUser)]
     [Route("Checkin")]
     public async Task<bool> Checkin([FromBody] int bookId)
     {

@@ -1,0 +1,58 @@
+<mat-card
+  style="
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-card-subtitle><h5>Login</h5></mat-card-subtitle>
+  <mat-card-content>
+    <div *ngIf="showError" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="loginUser(loginForm.value)"
+    >
+      <div class="m-1">
+        <label for="username">Username:</label>
+        <div>
+          <input type="text" id="username" formControlName="username" />
+        </div>
+        <div>
+          <em
+            *ngIf="
+              validateControl('username') && hasError('username', 'required')
+            "
+            >Username is required</em
+          >
+        </div>
+      </div>
+      <div class="m-1">
+        <label for="password">Password:</label>
+        <div>
+          <input type="password" id="password" formControlName="password" />
+        </div>
+        <div>
+          <em
+            *ngIf="
+              validateControl('password') && hasError('password', 'required')
+            "
+            >Password is required</em
+          >
+        </div>
+      </div>
+      <br />
+      <div class="m-1">
+        <div>
+          <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
