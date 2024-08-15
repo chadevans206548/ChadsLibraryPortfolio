@@ -1,5 +1,17 @@
 <div >
   <h5>Search Books</h5>
+  <div class="topBar">
+    <form [formGroup]="searchForm" autocomplete="off" novalidate>
+      <label for="searchText">Search:</label>
+      <input type="text" id="searchText" formControlName="searchText" />
+      <button mat-icon-button (click)="search()" *ngIf="searchMode" style="margin-right: 4vw;">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-icon-button (click)="cancel()" *ngIf="!searchMode" style="margin-right: 4vw;">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </form>
+  </div>  
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
