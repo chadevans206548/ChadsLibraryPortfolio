@@ -9,7 +9,13 @@ import { BookViewModel } from '../interfaces';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-search-books',
@@ -36,12 +42,25 @@ export class SearchBooksComponent implements OnInit {
   searchForm: FormGroup = new FormGroup({
     searchText: new FormControl(''),
   });
-  constructor(private dataService: DataService, private router: Router) {}
+  isLibrarian = false;
+
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['title', 'author', 'description', 'rating', 'action'];
 
   ngOnInit(): void {
+    if (this.authService.isUserLibrarian()) {
+      this.isLibrarian = true;
+    }
+    this.getBookData();
+  }
+
+  getBookData() {
     this.dataService.getAllBooks().subscribe((x) => {
       this.dataSource = new BooksViewModelDataSource(x);
 
@@ -53,6 +72,16 @@ export class SearchBooksComponent implements OnInit {
 
   viewBook(bookId: number) {
     this.router.navigate(['/book', bookId]);
+  }
+
+  editBook(bookId: number) {
+    this.router.navigate(['/edit-book', bookId]);
+  }  
+
+  deleteBook(bookId: number) {
+    this.dataService.deleteBook(bookId).subscribe((x) => {
+      this.getBookData();
+    });
   }
 
   cancel() {
@@ -69,6 +98,8 @@ export class SearchBooksComponent implements OnInit {
   }
 
   filter(searchText: string) {
-    this.table.dataSource = this.dataSource.data.filter((x) => x.title.includes(searchText));
-  }  
+    this.table.dataSource = this.dataSource.data.filter((x) =>
+      x.title.includes(searchText)
+    );
+  }
 }

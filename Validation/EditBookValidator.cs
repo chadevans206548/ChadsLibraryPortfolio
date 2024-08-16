@@ -42,13 +42,17 @@ public class EditBookValidator : AbstractValidator<EditBookViewModel>
 
     private async Task<bool> NotDuplicateTitle(EditBookViewModel vm, CancellationToken cancellationToken)
     {
+        var book = await this._bookService.GetBook(vm.BookId);
         var results = await this._bookService.GetBookByTitle(vm.Title);
-        return results != null;
+        var duplicate = results == null || results.BookId != book.BookId;
+        return !duplicate;
     }
 
     private async Task<bool> NotDuplicateIsbn(EditBookViewModel vm, CancellationToken cancellationToken)
     {
+        var book = await this._bookService.GetBook(vm.BookId);
         var results = await this._bookService.GetBookByIsbn(vm.Isbn);
-        return results != null;
+        var duplicate = results == null || results.BookId != book.BookId;
+        return !duplicate;
     }
 }

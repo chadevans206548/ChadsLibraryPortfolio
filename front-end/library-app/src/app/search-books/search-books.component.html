@@ -1,5 +1,5 @@
 <div >
-  <h5>Search Books</h5>
+  <h6>Search Books</h6>
   <div class="topBar">
     <form [formGroup]="searchForm" autocomplete="off" novalidate>
       <label for="searchText">Search:</label>
@@ -39,6 +39,12 @@
         <button mat-raised-button (click)="viewBook(row.bookId)">
           View
         </button>
+        <button mat-raised-button (click)="editBook(row.bookId)" *ngIf="isLibrarian">
+          Edit
+        </button>
+        <button mat-raised-button (click)="deleteBook(row.bookId)" *ngIf="isLibrarian">
+          Delete
+        </button>                
       </td>
     </ng-container>    
 

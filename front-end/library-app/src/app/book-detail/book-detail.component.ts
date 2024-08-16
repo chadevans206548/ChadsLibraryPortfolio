@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { ReviewListComponent } from '../review-list/review-list.component';
 import { BookViewModel } from '../interfaces';
@@ -21,7 +21,8 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,5 +55,9 @@ export class BookDetailComponent implements OnInit, AfterViewInit {
         this.book!.available = x > 0;  
       })
     }
+  }
+
+  leaveReview() {
+    this.router.navigate(['/leave-review', this.book?.bookId]);
   }
 }

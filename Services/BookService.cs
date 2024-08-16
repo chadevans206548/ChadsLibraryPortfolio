@@ -44,8 +44,15 @@ public class BookService(LibraryContext libraryContext, IMapper mapper) : IBookS
     {
         if (this._libraryContext.Books.Any(x => x.BookId == bookId))
         {
-            var entity = await this._libraryContext.Books.FirstOrDefaultAsync(x => x.BookId == bookId);
+            var reviews = await this._libraryContext.Reviews.Where(x => x.BookId == bookId).ToListAsync();
+            this._libraryContext.RemoveRange(reviews);
+
+            var logs = await this._libraryContext.InventoryLogs.Where(x => x.BookId == bookId).ToListAsync();
+            this._libraryContext.RemoveRange(logs);
+
+            var entity = await this._libraryContext.Books.FirstAsync(x => x.BookId == bookId);
             this._libraryContext.Remove(entity);
+
             await this._libraryContext.SaveChangesAsync();
             return true;
         }

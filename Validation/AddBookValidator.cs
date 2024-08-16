@@ -31,12 +31,12 @@ public class AddBookValidator : AbstractValidator<AddBookViewModel>
     private async Task<bool> NotDuplicateTitle(AddBookViewModel vm, CancellationToken cancellationToken)
     {
         var results = await this._bookService.GetBookByTitle(vm.Title);
-        return results != null;
+        return results == null;
     }
 
     private async Task<bool> NotDuplicateIsbn(AddBookViewModel vm, CancellationToken cancellationToken)
     {
         var results = await this._bookService.GetBookByIsbn(vm.Isbn);
-        return results != null;
+        return results == null;
     }
 }

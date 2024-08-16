@@ -10,7 +10,7 @@ public class TestDataService(LibraryContext libraryContext) : ITestDataService
 
     public bool AddTestData()
     {
-        if (this._libraryContext.Books.Count() >= 10)
+        if (this._libraryContext.Books.Any())
         {
             return false;
         }

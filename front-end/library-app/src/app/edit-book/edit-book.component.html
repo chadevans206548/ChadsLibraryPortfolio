@@ -1,0 +1,138 @@
+<mat-card
+  style="
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    justify-content: center;
+    align-items: flex-start;
+  "
+>
+  <mat-card-subtitle><h6>Edit a book</h6></mat-card-subtitle>
+  <mat-card-content class="full-width">
+    <form
+      [formGroup]="editBookForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="editBook(editBookForm.value)"
+      class="full-width"
+    >
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Title:</mat-label>
+          <input matInput formControlName="title" name="title" />
+          <mat-error *ngIf="editBookForm.get('title')?.hasError('required')">
+            Please add a title
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Author:</mat-label>
+          <input matInput formControlName="author" name="author" />
+          <mat-error *ngIf="editBookForm.get('author')?.hasError('required')">
+            Please add an author
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 75%">
+          <mat-label>Description:</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            name="description"
+          ></textarea>
+          <mat-error
+            *ngIf="editBookForm.get('description')?.hasError('required')"
+          >
+            Please add a description
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Cover Image URL:</mat-label>
+          <input matInput formControlName="coverImage" name="coverImage" />
+          <mat-error
+            *ngIf="editBookForm.get('coverImage')?.hasError('required')"
+          >
+            Please add a URL for the cover image (like
+            https://picsum.photos/200/200/?image=238)
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Publisher:</mat-label>
+          <input matInput formControlName="publisher" name="publisher" />
+          <mat-error *ngIf="editBookForm.get('publisher')?.hasError('required')">
+            Please add a publisher
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Publication Date:</mat-label>
+          <input
+            matInput
+            type="date"
+            formControlName="publicationDate"
+            name="publicationDate"
+          />
+          <mat-error
+            *ngIf="editBookForm.get('publicationDate')?.hasError('required')"
+          >
+            Please add a publication date
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Category:</mat-label>
+          <input matInput formControlName="category" name="category" />
+          <mat-error *ngIf="editBookForm.get('category')?.hasError('required')">
+            Please add a category
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>ISBN #:</mat-label>
+          <input matInput formControlName="isbn" name="isbn" />
+          <mat-error *ngIf="editBookForm.get('isbn')?.hasError('required')">
+            Please add an ISBN number
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="m-1">
+        <mat-form-field style="width: 50%">
+          <mat-label>Page Count:</mat-label>
+          <input matInput formControlName="pageCount" name="pageCount" />
+          <mat-error *ngIf="editBookForm.get('pageCount')?.hasError('required')">
+            Please add the page count
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="!validationResults.isValid" role="alert">
+        <div *ngFor="let error of validationResults.errorMessages">
+          {{ error }}
+        </div>
+      </div>
+
+      <div>
+        <button mat-raised-button type="submit" [disabled]="!editBookForm.valid">
+          Edit book
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

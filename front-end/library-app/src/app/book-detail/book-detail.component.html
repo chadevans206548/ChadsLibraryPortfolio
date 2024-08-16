@@ -1,24 +1,26 @@
 <div>
   <div class="topBar">
-    <button
-      mat-raised-button
-      class="ml-05"
-      (click)="checkout()"
-      [disabled]="!book?.available || isLibrarian"
-    >
-      Checkout
-    </button>
-    <button
-      mat-raised-button
-      class="ml-05"
-      (click)="checkin()"
-      [disabled]="book?.available || !isLibrarian"
-    >
-      Checkin
-    </button>
+    <h6>Book detail</h6>
+    <div>
+      <button
+        mat-raised-button
+        class="ml-05"
+        (click)="checkout()"
+        [disabled]="!book?.available || isLibrarian"
+      >
+        Checkout
+      </button>
+      <button
+        mat-raised-button
+        class="ml-05"
+        (click)="checkin()"
+        [disabled]="book?.available || !isLibrarian"
+      >
+        Checkin
+      </button>
+    </div>
   </div>
-  <h5>Book detail</h5>
-  <div style="display: flex; margin-bottom: 4vh;">
+  <div style="display: flex; margin-bottom: 4vh">
     <div style="flex-direction: column">
       <div class="row">
         <span class="title">Title:</span>
@@ -62,6 +64,16 @@
       <img src="{{ book?.coverImage }}" width="200" height="200" />
     </div>
   </div>
-  <h5>Book Reviews</h5>
+  <div class="topBar">
+    <h6>Book Reviews</h6>
+    <button
+      mat-raised-button
+      class="ml-05"
+      (click)="leaveReview()"
+      [disabled]="isLibrarian"
+    >
+      Leave review
+    </button>
+  </div>
   <app-review-list [bookId]="bookId"></app-review-list>
 </div>

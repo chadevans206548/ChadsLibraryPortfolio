@@ -1,6 +1,5 @@
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Common;
 

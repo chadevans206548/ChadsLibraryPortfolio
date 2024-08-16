@@ -11,9 +11,12 @@
     Librarians
   </button>
   <mat-menu #librarianMenu="matMenu" yPosition="below">
-    <a mat-button routerLink="manage" routerLinkActive="activebutton"
-      >Manage Books</a
-    >
+    <a mat-button routerLink="add-book" routerLinkActive="activebutton"
+      >Add Books</a
+    ><br/>
+    <a mat-button routerLink="search" routerLinkActive="activebutton"
+    >Search Books</a
+  >
   </mat-menu>
 
   <button
@@ -27,7 +30,7 @@
   <mat-menu #customerMenu="matMenu" yPosition="below">
     <a mat-button routerLink="featured" routerLinkActive="activebutton"
       >Featured Books</a
-    >
+    ><br/>
     <a mat-button routerLink="search" routerLinkActive="activebutton"
       >Search Books</a
     >

@@ -1,31 +1,31 @@
 export interface ReviewListItem {
-    reviewId: number;
-    bookId: number;
-    rating: number;
-    description: string;
-  }
+  reviewId: number;
+  bookId: number;
+  rating: number;
+  description: string;
+}
 
-  export interface BookViewModel {
-    bookId: number;
-    title: string;
-    author: string;
-    description: string;
-    coverImage: string;
-    publisher: string;
-    publicationDate: Date | null;
-    category: string;
-    isbn: string;
-    pageCount: number;
-    averageUserRating: number;
-    available: boolean;
-  }
+export interface BookViewModel {
+  bookId: number;
+  title: string;
+  author: string;
+  description: string;
+  coverImage: string;
+  publisher: string;
+  publicationDate: Date | null;
+  category: string;
+  isbn: string;
+  pageCount: number;
+  averageUserRating: number;
+  available: boolean;
+}
 
-  export interface AddUserViewModel {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    role: string;
+export interface AddUserViewModel {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 export interface RegistrationResponseViewModel {
@@ -42,4 +42,40 @@ export interface AuthenticationResponseViewModel {
   isAuthSuccessful: boolean;
   errorMessage: string;
   token: string;
+}
+
+export interface AddReviewViewModel {
+  bookId: number;
+  description: string;
+  rating: number;
+}
+
+export interface AddBookViewModel {
+  title: string;
+  author: string;
+  description: string;
+  coverImage: string;
+  publisher: string;
+  publicationDate: Date | null;
+  category: string;
+  isbn: string;
+  pageCount: number;
+}
+
+export interface ValidationResultViewModel {
+  isValid: boolean;
+  errorMessages: string[]
+}
+
+export interface EditBookViewModel {
+  bookId: number;
+  title: string;
+  author: string;
+  description: string;
+  coverImage: string;
+  publisher: string;
+  publicationDate: Date | null;
+  category: string;
+  isbn: string;
+  pageCount: number;
 }

@@ -1,0 +1,53 @@
+<mat-card
+  style="
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    justify-content: center;
+    align-items: flex-start;
+  "
+>
+  <mat-card-subtitle><h6>Add a review</h6></mat-card-subtitle>
+  <mat-card-content class="full-width">
+    <form
+      [formGroup]="addReviewForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="addReview(addReviewForm.value)"
+      class="full-width"
+    >
+
+      <div class="m-1">
+          <mat-form-field appearance="fill">
+            <mat-label>Rating:</mat-label>
+            <mat-select formControlName="rating">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{ option.description }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addReviewForm.get('rating')?.hasError('required')">
+              Please select a rating
+            </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="m-1">
+      <mat-form-field style="width: 75%;">
+        <mat-label>Comments:</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="addReviewForm.get('description')?.hasError('required')">
+            Please add review comments
+          </mat-error>
+      </mat-form-field>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="!addReviewForm.valid"
+        >
+          Submit review
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
