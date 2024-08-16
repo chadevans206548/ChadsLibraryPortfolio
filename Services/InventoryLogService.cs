@@ -1,4 +1,3 @@
-using System.Xml;
 using AutoMapper;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.Model.Entities;
@@ -85,7 +84,7 @@ public class InventoryLogService(LibraryContext libraryContext, IMapper mapper, 
             {
                 var addLog = new InventoryLog();
                 this._mapper.Map(book, addLog);
-                addLog.User = "test person replace me";
+                addLog.User = "Security.Username"; //from token? abstract user service?
                 var entity = await this._libraryContext.AddAsync(addLog);
                 await this._libraryContext.SaveChangesAsync();
                 return entity.Entity.InventoryLogId;

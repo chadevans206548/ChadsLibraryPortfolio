@@ -26,7 +26,6 @@ public class Startup
         this.Configuration = configuration;
     }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMemoryCache();
@@ -59,8 +58,6 @@ public class Startup
                     .AllowCredentials());
         });
 
-        //services.AddMicrosoftIdentityWebApiAuthentication(this.Configuration, "AzureAd");
-
         services.AddOpenApiDocument(doc =>
         {
             doc.DocumentName = "Chads Library Portfolio Web API";
@@ -75,45 +72,11 @@ public class Startup
                 {
                     Implicit = new OpenApiOAuthFlow()
                     {
-                        //Scopes = new Dictionary<string, string>
-                        //{
-                        //    { this._appSettings.ApiScope, "TRS API API" }
-                        //},
-                        //AuthorizationUrl = $"{this._appSettings.AuthApiBasePath}/authorize",
-                        //TokenUrl = $"{this._appSettings.AuthApiBasePath}/token",
                     },
                 },
             });
             doc.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
         });
-
-        //services.AddAuthorization(options =>
-        //{
-        //    Intended for this application, not claim specific
-
-        //   options.AddPolicy(Helpers.Constants.AuthPolicy.AuthenticatedUser, policy =>
-        //   {
-        //       policy.RequireAuthenticatedUser();
-        //       policy.RequireScope(this._appSettings.ApiResourceName);
-        //   });
-
-        //    User Manager Policy
-
-        //   options.AddPolicy(Helpers.Constants.AuthPolicy.UserManager, policy =>
-        //   {
-        //       policy.RequireAuthenticatedUser();
-        //       policy.RequireClaim(Helpers.Constants.ClaimType.General, Helpers.Constants.Claim.UserManage);
-        //   });
-
-        //    System Admin Policy
-        //    options.AddPolicy(Helpers.Constants.AuthPolicy.SystemAdmin, policy =>
-        //    {
-        //        policy.RequireAuthenticatedUser();
-        //        policy.RequireClaim(Helpers.Constants.ClaimType.General, Helpers.Constants.Claim.SystemAdmin);
-        //    });
-        //});
-
-        //services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
 
         // DI FOR SERVICES GO BELOW HERE //
         services.AddScoped<IBookService, BookService>();
@@ -121,7 +84,6 @@ public class Startup
         services.AddScoped<IInventoryLogService, InventoryLogService>();
         services.AddScoped<IReviewService, ReviewService>();
         services.AddScoped<Services.AuthenticationService>();
-
 
         //DI FOR ENTITY FRAMEWORK DBCONTEXT GO BELOW HERE //
         services.AddDbContext<LibraryContext>(options =>
@@ -177,7 +139,6 @@ public class Startup
 
         services.ConfigureApplicationCookie(options =>
         {
-            // Cookie settings
             options.Cookie.HttpOnly = true;
             options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
@@ -186,23 +147,13 @@ public class Startup
             options.SlidingExpiration = true;
         });
 
-        // These are located in the Extensions project
         services.AddBasicServices();
         services.AddAutoMappers();
-
         services.AddValidatorsFromAssembly(Assembly.Load("ViewModels"));
-
-        // Add services to the container.
         services.AddControllersWithViews();
-
-        //services.AddIdentityApiEndpoints<User>();
-        //services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<SecurityDbContext>();
-        //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>();
-
         services.AddAuthorization();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
     {
         var aWarningSaidThisHadToBeUsed = applicationLifetime;
@@ -212,7 +163,6 @@ public class Startup
         {
             config.OAuth2Client = new OAuth2ClientSettings()
             {
-                //ClientId = this._appSettings.ApiClientId,
                 AppName = "API - Swagger",
                 UsePkceWithAuthorizationCodeGrant = true
             };

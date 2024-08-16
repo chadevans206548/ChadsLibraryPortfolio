@@ -17,7 +17,7 @@
       class="full-width"
     >
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Title:</mat-label>
           <input matInput formControlName="title" name="title" />
           <mat-error *ngIf="addBookForm.get('title')?.hasError('required')">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Author:</mat-label>
           <input matInput formControlName="author" name="author" />
           <mat-error *ngIf="addBookForm.get('author')?.hasError('required')">
@@ -53,7 +53,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Cover Image URL:</mat-label>
           <input matInput formControlName="coverImage" name="coverImage" />
           <mat-error
@@ -66,7 +66,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Publisher:</mat-label>
           <input matInput formControlName="publisher" name="publisher" />
           <mat-error *ngIf="addBookForm.get('publisher')?.hasError('required')">
@@ -76,7 +76,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Publication Date:</mat-label>
           <input
             matInput
@@ -93,7 +93,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Category:</mat-label>
           <input matInput formControlName="category" name="category" />
           <mat-error *ngIf="addBookForm.get('category')?.hasError('required')">
@@ -103,7 +103,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>ISBN #:</mat-label>
           <input matInput formControlName="isbn" name="isbn" />
           <mat-error *ngIf="addBookForm.get('isbn')?.hasError('required')">
@@ -113,7 +113,7 @@
       </div>
 
       <div class="m-1">
-        <mat-form-field style="width: 50%">
+        <mat-form-field class="half-width">
           <mat-label>Page Count:</mat-label>
           <input matInput formControlName="pageCount" name="pageCount" />
           <mat-error *ngIf="addBookForm.get('pageCount')?.hasError('required')">

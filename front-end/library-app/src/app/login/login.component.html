@@ -8,7 +8,7 @@
   "
 >
   <mat-card-subtitle><h6>Login</h6></mat-card-subtitle>
-  <mat-card-content>
+  <mat-card-content class="full-width">
     <div *ngIf="showError" role="alert">
       {{ errorMessage }}
     </div>
@@ -18,34 +18,40 @@
       autocomplete="off"
       novalidate
       (ngSubmit)="loginUser(loginForm.value)"
+      class="full-width"
+      style="text-align: center;"
     >
       <div class="m-1">
-        <label for="username">Username:</label>
-        <div>
-          <input type="text" id="username" formControlName="username" />
-        </div>
-        <div>
+        <mat-form-field class="half-width">
+        <mat-label for="username">Username:</mat-label>
+        
+          <input matInput id="username" formControlName="username" />
+        
+        <mat-error>
           <em
             *ngIf="
               validateControl('username') && hasError('username', 'required')
             "
             >Username is required</em
           >
-        </div>
+        </mat-error>
+        </mat-form-field>
       </div>
       <div class="m-1">
-        <label for="password">Password:</label>
-        <div>
-          <input type="password" id="password" formControlName="password" />
-        </div>
-        <div>
+        <mat-form-field class="half-width">
+        <mat-label for="password">Password:</mat-label>
+        
+          <input matInput type="password" id="password" formControlName="password" />
+        
+        <mat-error>
           <em
             *ngIf="
               validateControl('password') && hasError('password', 'required')
             "
             >Password is required</em
           >
-        </div>
+        </mat-error>
+      </mat-form-field>
       </div>
       <br />
       <div class="m-1">

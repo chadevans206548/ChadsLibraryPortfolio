@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatOption,
     MatFormField,
     MatSelectModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class RegisterUserComponent {
@@ -43,10 +43,13 @@ export class RegisterUserComponent {
     lastName: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    role: new FormControl(''),
+    role: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthenticationService, private router: Router) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   public validateControl = (controlName: string) => {
     var ctrl = this.registerForm?.controls[controlName];
@@ -69,7 +72,7 @@ export class RegisterUserComponent {
     };
 
     this.authService.registerUser(user).subscribe({
-      next: (_) => this.router.navigate(["/login"]),
+      next: (_) => this.router.navigate(['/login']),
       error: (err: HttpErrorResponse) => console.log(err.error.errors),
     });
   };

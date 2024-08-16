@@ -34,9 +34,13 @@ export class AuthenticationService {
   public isUserLibrarian = (): boolean => {
     const token = localStorage.getItem("token") ?? '';
     const decodedToken = this.jwtHelper.decodeToken(token);
-    const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-  
-    return role === 'Librarian';
+
+    if(decodedToken) {
+      const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+      return role === 'Librarian';        
+    }
+
+    return false;
   }
 
   public sendAuthStateChangeNotification = (isAuthenticated: boolean) => {

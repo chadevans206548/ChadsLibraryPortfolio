@@ -8,28 +8,35 @@
   "
 >
   <mat-card-subtitle><h6>Register</h6></mat-card-subtitle>
-  <mat-card-content>
+  <mat-card-content class="full-width">
     <form
       [formGroup]="registerForm"
       autocomplete="off"
       novalidate
       (ngSubmit)="registerUser(registerForm.value)"
+      class="full-width"
+      style="text-align: center;"
     >
       <div class="m-1">
-        <label for="firstName">First Name:</label>
-        <div>
-          <input type="text" id="firstName" formControlName="firstName" />
-        </div>
+        <mat-form-field class="half-width">
+          <mat-label for="firstName">First Name:</mat-label>
+          <div>
+            <input matInput
+              id="firstName"
+              formControlName="firstName"
+            /></div
+        ></mat-form-field>
       </div>
       <div class="m-1">
-        <label for="lastName">Last Name:</label>
-        <div>
-          <input type="text" id="lastName" formControlName="lastName" />
-        </div>
+        <mat-form-field class="half-width">
+          <mat-label for="lastName">Last Name:</mat-label>
+          <div>
+            <input matInput id="lastName" formControlName="lastName" /></div
+        ></mat-form-field>
       </div>
       <div class="m-1">
         <div>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" class="half-width">
             <mat-label>Account Type:</mat-label>
             <mat-select formControlName="role">
               <mat-option *ngFor="let option of options" [value]="option">
@@ -41,45 +48,43 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div>
-          <em *ngIf="validateControl('role') && hasError('role', 'role')"
-            >Please select a valid role</em
-          >
-          <em *ngIf="validateControl('role') && hasError('role', 'required')"
-            >Role is required</em
-          >
-        </div>
-      </div>      
-      <div class="m-1">
-        <label for="email">Email:</label>
-        <div>
-          <input type="email" id="email" formControlName="email" />
-        </div>
-        <div>
-          <em *ngIf="validateControl('email') && hasError('email', 'email')"
-            >Please provide a valid email</em
-          >
-          <em *ngIf="validateControl('email') && hasError('email', 'required')"
-            >Email is required</em
-          >
-        </div>
       </div>
       <div class="m-1">
-        <label for="password">Password:</label>
-        <div>
-          <input type="password" id="password" formControlName="password" />
-        </div>
-        <div>
-          <em
-            *ngIf="
-              validateControl('password') && hasError('password', 'required')
-            "
-            >Password is required</em
-          >
-        </div>
+        <mat-form-field class="half-width">
+          <mat-label for="email">Email:</mat-label>
+          <div>
+            <input matInput id="email" formControlName="email" />
+          </div>
+          <mat-error>
+            <em *ngIf="validateControl('email') && hasError('email', 'email')"
+              >Please provide a valid email</em
+            >
+            <em
+              *ngIf="validateControl('email') && hasError('email', 'required')"
+              >Email is required</em
+            >
+          </mat-error>
+        </mat-form-field>
       </div>
-      <div class="m-1" style="font-size: small;">
-        <em>Passwords must:
+      <div class="m-1">
+        <mat-form-field class="half-width">
+          <mat-label for="password">Password:</mat-label>
+          <div>
+            <input matInput type="password" id="password" formControlName="password" />
+          </div>
+          <mat-error>
+            <em
+              *ngIf="
+                validateControl('password') && hasError('password', 'required')
+              "
+              >Password is required</em
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="m-1" style="font-size: small; text-align: left;">
+        <em
+          >Passwords must:
           <ul>
             <li>be at least 6 characters</li>
             <li>contain a number</li>
@@ -88,7 +93,6 @@
           </ul>
         </em>
       </div>
-      <br />
       <div>
         <div>
           <button
