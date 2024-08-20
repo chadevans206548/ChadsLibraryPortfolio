@@ -17,9 +17,6 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isUserAuthenticated()) {
-      return true;
-    }
-    return false;
+    return this.authService.isUserAuthenticated();
   }
 }

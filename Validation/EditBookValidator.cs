@@ -44,15 +44,41 @@ public class EditBookValidator : AbstractValidator<EditBookViewModel>
     {
         var book = await this._bookService.GetBook(vm.BookId);
         var results = await this._bookService.GetBookByTitle(vm.Title);
-        var duplicate = results == null || results.BookId != book.BookId;
-        return !duplicate;
+        if (results == null)
+        {
+            return true;
+        }
+        else
+        {
+            if (results.BookId == book.BookId)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     private async Task<bool> NotDuplicateIsbn(EditBookViewModel vm, CancellationToken cancellationToken)
     {
         var book = await this._bookService.GetBook(vm.BookId);
         var results = await this._bookService.GetBookByIsbn(vm.Isbn);
-        var duplicate = results == null || results.BookId != book.BookId;
-        return !duplicate;
+        if (results == null)
+        {
+            return true;
+        }
+        else
+        {
+            if (results.BookId == book.BookId)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

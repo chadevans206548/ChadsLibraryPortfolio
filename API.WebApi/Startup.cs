@@ -10,9 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using NSwag;
-using NSwag.AspNetCore;
-using NSwag.Generation.Processors.Security;
+using Microsoft.OpenApi.Models;
 
 namespace API.WebApi;
 
@@ -34,7 +32,7 @@ public class Startup
             o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
 
-        services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         string appPath = AppDomain.CurrentDomain.BaseDirectory;
         string jsonPath = Path.Combine(Directory.GetParent(Directory.GetParent(appPath).FullName).FullName, "appsettings.json");
@@ -56,26 +54,6 @@ public class Startup
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials());
-        });
-
-        services.AddOpenApiDocument(doc =>
-        {
-            doc.DocumentName = "Chads Library Portfolio Web API";
-            doc.Version = "v1";
-            doc.Title = "Chads Library Portfolio Web API";
-            doc.AddSecurity("bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.OAuth2,
-                Description = "Azure AAD Authentication",
-                Flow = OpenApiOAuth2Flow.Implicit,
-                Flows = new OpenApiOAuthFlows()
-                {
-                    Implicit = new OpenApiOAuthFlow()
-                    {
-                    },
-                },
-            });
-            doc.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
         });
 
         // DI FOR SERVICES GO BELOW HERE //
@@ -151,6 +129,36 @@ public class Startup
         services.AddAutoMappers();
         services.AddValidatorsFromAssembly(Assembly.Load("ViewModels"));
         services.AddControllersWithViews();
+        services.AddEndpointsApiExplorer();
+
+        services.AddSwaggerGen(opt =>
+        {
+            opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Chads Library Portfolio Web API", Version = "v1" });
+            opt.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Please enter token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "bearer"
+            });
+            opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type=ReferenceType.SecurityScheme,
+                            Id="bearer"
+                        }
+                    },
+                    new string[]{}
+                }
+            });
+        });
+
         services.AddAuthorization();
     }
 
@@ -158,15 +166,8 @@ public class Startup
     {
         var aWarningSaidThisHadToBeUsed = applicationLifetime;
 
-        app.UseOpenApi();
-        app.UseSwaggerUi(config =>
-        {
-            config.OAuth2Client = new OAuth2ClientSettings()
-            {
-                AppName = "API - Swagger",
-                UsePkceWithAuthorizationCodeGrant = true
-            };
-        });
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseRouting();
         app.UseCors("ChadsLibraryPortfolio");
@@ -176,6 +177,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapSwagger();
         });
 
         app.UseHttpsRedirection();

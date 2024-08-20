@@ -1,17 +1,21 @@
+using ChadsLibraryPortfolio.Helpers;
 using ChadsLibraryPortfolio.Interfaces;
 using ChadsLibraryPortfolio.ViewModels.Reviews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ViewModels.Common;
 
 namespace API.WebApi.Controllers;
 
 [Route("api/[controller]")]
+[Authorize]
 [ApiController]
 public class ReviewController(IReviewService reviewService) : ControllerBase
 {
     private readonly IReviewService _reviewService = reviewService;
 
     [HttpPost]
+    [Authorize(Roles = Constants.AuthPolicy.CustomerUser)]
     [Route("AddReview")]
     public async Task<ActionResult<ReviewViewModel>> AddReview([FromBody] AddReviewViewModel addReviewViewModel)
     {
@@ -19,6 +23,7 @@ public class ReviewController(IReviewService reviewService) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = Constants.AuthPolicy.CustomerUser)]
     [Route("ValidateAddReview")]
     public async Task<ValidationResultViewModel> ValidateAddReview([FromBody] AddReviewViewModel addReviewViewModel)
     {
